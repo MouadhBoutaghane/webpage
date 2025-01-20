@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single Page Website</title>
+    <title>Responsive Single Page Website with Centered Search Bar</title>
     <style>
         /* General Styles */
         body {
@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            font-size: 16px;
         }
 
         nav {
@@ -21,11 +22,19 @@
             color: #fff;
             display: flex;
             justify-content: center;
-            padding: 10px 0;
+            align-items: center;
+            padding: 10px 20px;
             z-index: 1000;
         }
 
-        nav a {
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
             color: #fff;
             text-decoration: none;
             margin: 0 15px;
@@ -33,7 +42,7 @@
             transition: background 0.3s;
         }
 
-        nav a:hover {
+        .nav-links a:hover {
             background: #575757;
             border-radius: 5px;
         }
@@ -46,6 +55,49 @@
         #home {
             background: #f4f4f4;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #home h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .search-bar input {
+            padding: 10px 20px;
+            width: 300px;
+            max-width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background: #575757;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #444;
         }
 
         #about {
@@ -60,29 +112,68 @@
             background: #999;
         }
 
+        h2 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
         /* Responsive Design */
-        @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 15px;
             }
 
-            nav a {
-                margin: 5px 0;
+            h1, h2 {
+                font-size: 1.5rem;
+            }
+
+            .search-bar input {
+                width: 250px;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 70px 10px;
+            }
+
+            h1, h2 {
+                font-size: 1.2rem;
+            }
+
+            .search-bar input {
+                width: 200px;
+            }
+
+            p {
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
     <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
     <section id="home">
         <h1>Welcome to Our Website</h1>
-        <p>This is a simple single-page website example.</p>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search...">
+            <button onclick="performSearch()">Go</button>
+        </div>
     </section>
 
     <section id="about">
@@ -109,6 +200,16 @@
                 target.scrollIntoView({ behavior: 'smooth' });
             });
         });
+
+        // Search Functionality (Example)
+        function performSearch() {
+            const query = document.getElementById('search').value.toLowerCase();
+            if (!query) {
+                alert('Please enter a search term.');
+                return;
+            }
+            alert(`Searching for: ${query}`);
+        }
     </script>
 </body>
 </html>
